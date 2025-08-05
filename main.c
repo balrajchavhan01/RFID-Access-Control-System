@@ -1,6 +1,6 @@
 #include "header.h"
 int main() {
-    char tag[11]="12345678", timebuf[9];
+    char tag[11], timebuf[9];
 	//char *p=tag;
     
 	char valid_tag[] = "12345678";
@@ -14,10 +14,10 @@ int main() {
 	
 
     while (1) {
-			//int i;
-        //for (i = 0; i < 10; i++)
-          // tag[i] = uart0_getchar(); // Read 10 chars from RFID
-        //tag[10] = '\0';
+			int i;
+        for (i = 0; i < 10; i++)
+           tag[i] = uart0_getchar(); // Read 10 chars from RFID
+        tag[10] = '\0';
 
 			
         lcd_cmd(0x01);
@@ -29,10 +29,10 @@ int main() {
 					lcd_cmd(0xC0);
 					lcd_str("UNLOCKING...");
 					servo_lock();
-            //rtc_get_time(timebuf);
-            //lcd_cmd(0xC0); // Second line
-            //lcd_str(timebuf);
-            //delay_ms(3);
+            rtc_get_time(timebuf);
+            lcd_cmd(0xC0); // Second line
+            lcd_str(timebuf);
+            delay_ms(3);
 //servo_lock();
         } else {
 					//servo_lock();
@@ -51,3 +51,4 @@ int main() {
 				
     }
 }
+
